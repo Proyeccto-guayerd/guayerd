@@ -4,7 +4,11 @@
 <title>Formulario de Donante</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style>
+
     .required-icon {
   color: red;
   font-size: 11px;
@@ -19,6 +23,7 @@
     line-height: 18px;
     letter-spacing: normal;
 }
+
 
 .welcome-message {
     text-align: center;
@@ -51,6 +56,19 @@ label {
 }
 
 input[type="text"],
+select {
+     font-size: 12px;
+    text-align: start;
+    line-height: 18px;
+    letter-spacing: normal;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+input[type="email"],
 select {
      font-size: 12px;
     text-align: start;
@@ -112,7 +130,25 @@ input[type="submit"]:hover {
   }
 }
 </style>
-<script src=""></script>
+ <script>
+    function toggleInput() {
+      var selectElement = document.getElementById("00NDn00000buKqS");
+      var inputElement = document.getElementById("00NDn00000bu11f");
+
+      if (selectElement.value === "Si") {
+        inputElement.disabled = false;
+      } else {
+        inputElement.disabled = true;
+        inputElement.value = "";
+      }
+    }
+ $(function() {
+    // Inicializar el Datepicker
+    $("#00NDn00000bu5gV").datepicker({
+      dateFormat: "dd/mm/yy" // Configurar el formato de fecha
+    });
+  });
+  </script>
 
 <body>
     <div class="welcome-message">
@@ -134,7 +170,7 @@ input[type="submit"]:hover {
 <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
 
 <input type=hidden name="oid" value="00DDn00000DtO2B">
-<input type=hidden name="retURL" value="https://proyeccto-guayerd.github.io/guayerd/agradecimiento.html">">
+<input type=hidden name="retURL" value="https://proyeccto-guayerd.github.io/guayerd/agradecimiento.html">
 
 <!--  ----------------------------------------------------------------------  -->
 <!--  NOTA: Estos campos son elementos de depuración opcionales. Elimine      -->
@@ -147,27 +183,26 @@ input[type="submit"]:hover {
  <div class="container">
     <div class="form-group">
       <label for="first_name"><span class="required-icon">★</span>Nombre</label>
-      <input id="first_name" maxlength="40" name="first_name" size="20" type="text" required>
+      <input id="first_name" maxlength="40" name="first_name" size="20" type="text" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s\-']+" required placeholder="Ejemplo: Juan">
     </div>
 
     <div class="form-group">
       <label for="last_name"><span class="required-icon">★</span>Apellidos</label>
-      <input id="last_name" maxlength="80" name="last_name" size="20" type="text" required>
+      <input id="last_name" maxlength="80" name="last_name" size="20" type="text" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s\-']+" required placeholder="Ejemplo: López Pérez">
     </div>
 
     <div class="form-group">
         <label for="email"><span class="required-icon">★</span>Correo electrónico</label>
-        <input  id="email" maxlength="80" name="email" size="20" type="text" required>
+        <input  id="email" maxlength="80" name="email" size="20" type="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"  placeholder="Ejemplo: ejemplo@ejemplo.com">
   
     </div>
 
     <div class="form-group">
       <label for="phone"><span class="required-icon">★</span>Teléfono</label>
-      <input id="phone" maxlength="40" name="phone" size="20" type="text" required>
-    </div>
+      <input id="phone" maxlength="40" name="phone" size="20" type="text" pattern="^\+\d{1,3}\s?\d{3,}$" required placeholder="Ejemplo: +52987987">    </div>
 
     <div class="form-group">
-    Tipo:<select  id="00NDn00000bu0nE" name="00NDn00000bu0nE" title="Tipo">
+    Tipo de donación:<select  id="00NDn00000bu0nE" name="00NDn00000bu0nE" title="Tipo">
         <option value="">--Ninguno--</option>
         <option value="Ropa">Ropa</option>
 <option value="Juguetes">Juguetes</option>
@@ -177,25 +212,28 @@ input[type="submit"]:hover {
     </div>
 
     <div class="form-group">
-    País de la donación:<select  id="00NDn00000bu0wk" name="00NDn00000bu0wk" title="País de la donación"><option value="">--Ninguno--</option><option value="CL">CL</option>
-<option value="CO">CO</option>
-<option value="MX">MX</option>
-<option value="AR">AR</option>
+    País de la donación:<select  id="00NDn00000bu0wk" name="00NDn00000bu0wk" title="País de la donación"><option value="">--Ninguno--</option><option value="CL">Chile</option>
+<option value="CO">Colombia</option>
+<option value="MX">México</option>
+<option value="AR">Argentina</option>
 </select>
     </div>
 
     <div class="form-group">
-     Trabajo en una organización social:<select  id="00NDn00000buKqS" name="00NDn00000buKqS" title="Trabajo en una organización social"><option value="">--Ninguno--</option><option value="Si">Si</option>
+     Trabajo en una organización social:<select  id="00NDn00000buKqS" name="00NDn00000buKqS" title="Trabajo en una organización social" onchange="toggleInput()">
+      <option value="Si">Si</option>
 <option value="No">No</option>
 </select>
     </div>
 
     <div class="form-group">
-     Organización o institución:<input  id="00NDn00000bu11f" maxlength="40" name="00NDn00000bu11f" size="20" type="text" />
+     Nombre de la organización o institución:<input  id="00NDn00000bu11f" maxlength="40" name="00NDn00000bu11f" size="20" type="text" />
     </div>
 
     <div class="form-group">
-    Metodo de pago DO:<select  id="00NDn00000bu0wQ" name="00NDn00000bu0wQ" title="Metodo de pago DO"><option value="">--Ninguno--</option><option value="Tarjeta de crédito">Tarjeta de crédito</option>
+    Metodo de pago DO:<select  id="00NDn00000bu0wQ" name="00NDn00000bu0wQ" title="Metodo de pago DO" >
+      <option value="">--Ninguno--</option>
+      <option value="Tarjeta de crédito">Tarjeta de crédito</option>
 <option value="Cheque">Cheque</option>
 <option value="Tarjeta de débito">Tarjeta de débito</option>
 <option value="Transferencia electrónica de fondos">Transferencia electrónica de fondos</option>
@@ -203,7 +241,7 @@ input[type="submit"]:hover {
 </select>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" >
     Tipo de tarjeta DO:<select  id="00NDn00000bu0rp" name="00NDn00000bu0rp" title="Tipo de tarjeta DO"><option value="">--Ninguno--</option><option value="American Express">American Express</option>
 <option value="Visa Débito">Visa Débito</option>
 <option value="Mastercard Débito">Mastercard Débito</option>
@@ -213,16 +251,18 @@ input[type="submit"]:hover {
 </select>
     </div>
 
-    <div class="form-group">
-    Numero de Tarjeta:<input  id="00NDn00000bu5Pk" name="00NDn00000bu5Pk" size="20" type="number" maxlenght="16" />
+    <div class="form-group" >
+    Numero de Tarjeta:<input  id="00NDn00000bu5Pk" name="00NDn00000bu5Pk" size="20" type="text" maxlength="16" pattern="[0-9]{15,16}" title="Ingrese un número de tarjeta de crédito válido" />
     </div>
 
     <div class="form-group">
-     Codigo de seguridad:<input  id="00NDn00000bu5gL" name="00NDn00000bu5gL" size="20" type="text" />
+     Codigo de seguridad:<input  id="00NDn00000bu5gL" name="00NDn00000bu5gL" size="4" type="text" maxlength="4" pattern="[0-9]{3,4}" />
     </div>
 
-    <div class="form-group">
- Fecha de vencimiento TC TD DO:<span class="dateInput dateOnlyInput"><input  id="00NDn00000bu5gV" name="00NDn00000bu5gV" size="12" type="text" /></span>
+    <div class="form-group" >
+ Fecha de vencimiento TC TD DO:
+ <span class="dateInput dateOnlyInput">
+  <input  id="00NDn00000bu5gV" name="00NDn00000bu5gV" size="12" type="text" /></span>
     </div>
 
     <div class="form-group">
@@ -231,7 +271,7 @@ input[type="submit"]:hover {
 </select>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" >
     
 Moneda DO:<select  id="00NDn00000bu0ru" name="00NDn00000bu0ru" title="Moneda DO"><option value="">--Ninguno--</option><option value="USD - Dólar de EE.UU.">USD - Dólar de EE.UU.</option>
 <option value="Pesos - Pesos de Argentina">Pesos - Pesos de Argentina</option>
@@ -239,11 +279,10 @@ Moneda DO:<select  id="00NDn00000bu0ru" name="00NDn00000bu0ru" title="Moneda DO"
     </div>
 
     <div class="form-group">
-     Importe:<input  id="00NDn00000bu0s4" name="00NDn00000bu0s4" size="20" type="text" />
+     Importe:<input  id="00NDn00000bu0s4" name="00NDn00000bu0s4" size="20" type="text" pattern="[0-9]+" />
     </div>
 
   </div>
-
   <input type="submit" name="submit">
 
 

@@ -129,6 +129,9 @@ input[type="submit"]:hover {
     width: 100%;
   }
 }
+  .hidden {
+  display: none;
+}
 </style>
  <script>
     function toggleInput() {
@@ -146,6 +149,36 @@ input[type="submit"]:hover {
     // Inicializar el Datepicker
     $("#00NDn00000bu5gV").datepicker({
       dateFormat: "dd/mm/yy" // Configurar el formato de fecha
+    });
+  });
+    $(document).ready(function() {
+            // Ocultar los campos iniciales al cargar la página
+            $(".payment-fields").hide();
+
+            // Manejar el evento change del primer select
+            $("#00NDn00000bu0nE").change(function() {
+                var selectedOption = $(this).val();
+
+                // Si la opción "Dinero" está seleccionada, mostrar los campos de pago
+                if (selectedOption === "Dinero") {
+                    $(".payment-fields").show();
+                } else {
+                    $(".payment-fields").hide();
+                }
+            });
+        });
+     $(document).ready(function() {
+
+       $(".payment-fields-hide").hide();
+
+    $('#00NDn00000bu0wQ').change(function() {
+      var selectedOption = $(this).val();
+      if (selectedOption === '' || selectedOption === 'Cheque' || selectedOption === 'Otro') {
+        $('.payment-fields-hide').hide();
+      } else {
+        $('.payment-fields-hide').show();
+      }
+
     });
   });
   </script>
@@ -230,7 +263,7 @@ input[type="submit"]:hover {
      Nombre de la organización o institución:<input  id="00NDn00000bu11f" maxlength="40" name="00NDn00000bu11f" size="20" type="text" />
     </div>
 
-    <div class="form-group">
+   <div class="form-group payment-fields">
     Metodo de pago:<select  id="00NDn00000bu0wQ" name="00NDn00000bu0wQ" title="Metodo de pago DO" >
       <option value="">--Ninguno--</option>
       <option value="Tarjeta de crédito">Tarjeta de crédito</option>
@@ -241,7 +274,8 @@ input[type="submit"]:hover {
 </select>
     </div>
 
-    <div class="form-group" >
+    <div class="form-group payment-fields">
+      <div class="payment-fields-hide">
     Tipo de tarjeta: <select  id="00NDn00000bu0rp" name="00NDn00000bu0rp" title="Tipo de tarjeta"><option value="">--Ninguno--</option><option value="American Express">American Express</option>
 <option value="Visa Débito">Visa Débito</option>
 <option value="Mastercard Débito">Mastercard Débito</option>
@@ -250,31 +284,34 @@ input[type="submit"]:hover {
 <option value="Tarjeta MercadoPago">Tarjeta MercadoPago</option>
 </select>
     </div>
-
-    <div class="form-group" >
+ </div>
+    <div class="form-group payment-fields">
+      <div class="payment-fields-hide">
     Numero de Tarjeta:<input  id="00NDn00000bu5Pk" name="00NDn00000bu5Pk" size="20" type="text" maxlength="16" pattern="[0-9]{15,16}" title="Ingrese un número de tarjeta de crédito válido" />
     </div>
-
-    <div class="form-group">
+ </div>
+    <div class="form-group payment-fields">
+      <div class="payment-fields-hide">  
      Codigo de seguridad:<input  id="00NDn00000bu5gL" name="00NDn00000bu5gL" size="4" type="text" maxlength="4" pattern="[0-9]{3,4}" />
     </div>
-
-    <div class="form-group" >
+</div>
+      <div class="form-group payment-fields-hide">
  Fecha de vencimiento:
  <span class="dateInput dateOnlyInput">
   <input  id="00NDn00000bu5gV" name="00NDn00000bu5gV" size="12" type="text" /></span>
     </div>
 
-    <div class="form-group">
-     Importe:<input  id="00NDn00000bu0s4" name="00NDn00000bu0s4" size="20" type="text" pattern="[0-9]+" />
-    </div>
-
-    <div class="form-group" >
-    
+       <div class="form-group payment-fields">
 Moneda:<select  id="00NDn00000bu0ru" name="00NDn00000bu0ru" title="Moneda"><option value="">--Ninguno--</option><option value="USD - Dólar de EE.UU.">USD - Dólar de EE.UU.</option>
 <option value="Pesos - Pesos de Argentina">Pesos - Pesos de Argentina</option>
 </select>
     </div>
+   
+    <div class="form-group payment-fields">
+     Importe:<input  id="00NDn00000bu0s4" name="00NDn00000bu0s4" size="20" type="text" pattern="[0-9]+" />
+    </div>
+
+
 
     <div class="form-group">
       <!-- Divisa de la oportunidad:<select  id="00NDn00000bu54m" name="00NDn00000bu54m" title="Divisa de la oportunidad"><option value="">--Ninguno--</option><option value="Pesos">Pesos</option>

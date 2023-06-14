@@ -1,4 +1,9 @@
- function toggleInput() {
+ window.addEventListener('resize', function() {
+  var image = document.querySelector('.image-container img');
+  image.style.maxWidth = '100%';
+  image.style.height = 'auto';
+});
+function toggleInput() {
       var selectElement = document.getElementById("00NDn00000buKqS");
       var inputElement = document.getElementById("00NDn00000bu11f");
 

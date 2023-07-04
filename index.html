@@ -217,20 +217,19 @@ countrySelect.addEventListener("change", function() {
   var country = countrySelect.value;
   var provinces = provincesByCountry[country];
 
-  // Limpiar el select de provincias
+
   provinceSelect.innerHTML = "";
 
-  // Agregar la opción "--Ninguno--" si es seleccionado nuevamente
   if (country === "") {
     var noneOption = document.createElement("option");
     noneOption.value = "";
     noneOption.text = "--Ninguno--";
     provinceSelect.appendChild(noneOption);
   } else {
-    // Habilitar la selección de provincias
+  
     provinceSelect.disabled = false;
 
-    // Agregar las provincias correspondientes al país seleccionado
+    
     provinces.forEach(function(province) {
       var option = document.createElement("option");
       option.value = province;
